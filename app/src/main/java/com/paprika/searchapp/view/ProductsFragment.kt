@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paprika.searchapp.R
 import com.paprika.searchapp.databinding.FragmentProductsBinding
 import com.paprika.searchapp.viewmodel.ProductsViewModel
 
@@ -30,7 +32,14 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ProductAdapter(emptyList())
+        binding.arrowBack.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_productsFragment_to_searchFragment)
+        }
+
+        adapter = ProductAdapter(emptyList()){product->
+            val action = ProductsFragmentDirections.actionProductsFragmentToDetailsFragment(product)
+            Navigation.findNavController(binding.root).navigate(action)
+        }
         binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
         binding.rvProducts.adapter = adapter
 

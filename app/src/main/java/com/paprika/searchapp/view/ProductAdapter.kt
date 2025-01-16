@@ -8,7 +8,10 @@ import com.paprika.searchapp.databinding.ItemProductBinding
 import com.paprika.searchapp.models.Product
 
 
-class ProductAdapter(private var products: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(
+    private var products: List<Product>,
+    private val onItemClick: (Product) -> Unit
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     class ProductViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -27,6 +30,11 @@ class ProductAdapter(private var products: List<Product>) : RecyclerView.Adapter
         Glide.with(holder.binding.ivImage.context)
             .load(currentProduct.thumbnail)
             .into(holder.binding.ivImage)
+
+        holder.itemView.setOnClickListener {
+            onItemClick(currentProduct)
+        }
+
     }
 
 
