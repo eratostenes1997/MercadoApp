@@ -37,6 +37,10 @@ class DetailsFragment : Fragment() {
 
         product?.let {
             binding.tvDetailName.text = it.title
+            binding.tvEstado.text = it.condition
+            binding.tvPrice.text = it.price.toString()
+
+
             Glide.with(this)
                 .load(it.thumbnail)
                 .into(binding.ivDetailImage)
