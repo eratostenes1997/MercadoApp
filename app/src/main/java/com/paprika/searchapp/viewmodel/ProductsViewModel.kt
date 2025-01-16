@@ -12,9 +12,11 @@ import kotlinx.coroutines.launch
 class ProductsViewModel:ViewModel() {
      val products = MutableLiveData<List<Product>>()
      val repository = ProductRepository()
+     val isLoading = MutableLiveData<Boolean>()
 
     fun searchProducts(query: String) {
         viewModelScope.launch {
+            isLoading.value = true
             try {
                 val listProducts = repository.fetchAllProducts(query)
                 products.postValue(listProducts)
@@ -24,6 +26,8 @@ class ProductsViewModel:ViewModel() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.e("CharacterViewModel", "Error loading characters: ${e.message}")
+            }finally {
+                isLoading.value = false
             }
         }
     }

@@ -45,6 +45,10 @@ class ProductsFragment : Fragment() {
             adapter.updateProducts(products)
         }
 
+        viewModel.isLoading.observe(viewLifecycleOwner){isLoading->
+            binding.loagingPv.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
 
     }
 
