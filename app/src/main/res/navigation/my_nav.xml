@@ -22,8 +22,9 @@
         android:label="fragment_products"
         tools:layout="@layout/fragment_products" >
         <argument
-            android:name="producto"
-            app:argType="string" />
+            android:name="product"
+            app:argType="string"
+            android:defaultValue=""/>
         <action
             android:id="@+id/action_productsFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -37,8 +38,11 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details">
         <argument
-            android:name="product"
+            android:name="producto"
             app:argType="com.paprika.searchapp.models.Product" />
+        <action
+            android:id="@+id/action_detailsFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
     </fragment>
 
 

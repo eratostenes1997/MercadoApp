@@ -32,6 +32,7 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.arrowBack.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_productsFragment_to_searchFragment)
         }
@@ -44,11 +45,11 @@ class ProductsFragment : Fragment() {
         binding.rvProducts.adapter = adapter
 
 
-        val producto = arguments?.let{
-            ProductsFragmentArgs.fromBundle(it).producto
+        val product = arguments?.let{
+            ProductsFragmentArgs.fromBundle(it).product
         }?:""
 
-        viewModel.searchProducts(producto)
+        viewModel.searchProducts(product)
 
         viewModel.products.observe(viewLifecycleOwner){products->
             adapter.updateProducts(products)
@@ -60,6 +61,7 @@ class ProductsFragment : Fragment() {
 
 
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

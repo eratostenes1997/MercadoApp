@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.paprika.searchapp.R
 import com.paprika.searchapp.databinding.FragmentDetailsBinding
 
 
@@ -24,9 +27,12 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.arrowBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         val product = arguments?.let {
-            DetailsFragmentArgs.fromBundle(it).product
+            DetailsFragmentArgs.fromBundle(it).producto
         }
 
         product?.let {
